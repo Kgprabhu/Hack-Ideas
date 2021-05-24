@@ -1,0 +1,8 @@
+.challenge-container{
+  display: flex;
+}
+.challenge-card-container{
+  border: 1px solid #0e0e0e;
+  padding: 10px 20px;
+  margin: 10px;
+}
