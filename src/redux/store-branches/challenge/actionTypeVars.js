@@ -1,0 +1,1 @@
+export const ADD_NEW_CHALLENGE = 'ADD_NEW_CHALLENGE';

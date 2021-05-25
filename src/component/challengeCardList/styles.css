@@ -1,0 +1,54 @@
+.card-wrapper {
+  display: grid;
+  grid-row-gap: 10px;
+  grid-column-gap: 10px;
+  grid-template-columns: 25% 25% 25% 25%;
+  padding: 10px;
+}
+.card {
+    border-radius: 2px;
+    cursor: pointer;
+    box-shadow: rgb(0 0 0 / 16%) 0px 1px 4px;
+    padding: 16px;
+    overflow: auto;
+}
+.date {
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+.date .created-on {
+  font-weight: bold
+}
+.badge {
+  height: 24px;
+  border-radius: 0px 15px  15px 0px;
+  background: #3498db;
+  color: #fff;
+  padding: 0 13px;
+  display: inline-flex;
+  margin: 3px;
+}
+.badge-wrapper {
+  text-align: left;
+  padding-top: 16px;
+}
+.title {
+  text-transform: capitalize;
+  margin:12px 0;
+}
+.upvote-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding-top: 16px;
+}
+.upvote-wrapper img {
+  width: 24px;
+  height: 24px;
+}
+
+.upvote-count{
+  margin-right: 5px;
+}

@@ -1,16 +1,13 @@
 import React from 'react';
-
+import { withStoreState } from '../../hocs/withStoreState';
+import { withStoreActions } from '../../hocs/withStoreAction';
 import './Start.css';
 
 export class Start extends React.Component{
-  state={
-    employeeId:'',
-  }
+  
   handleChange = (event) =>{
     const employeeId = event.target.value;
-    this.setState({
-      employeeId,
-    });
+    this.employeeId = employeeId;
   }
   renderEmployeeDetails = () =>{
     return (
@@ -20,11 +17,14 @@ export class Start extends React.Component{
        </div>
     )
   }
-  handleClick =() =>{
-    const {employeeId}= this.state;
-    const { history} = this.props;
-    console.log('employeeId');
+  handleClick = async() =>{
+    const {employeeId}= this;
+    const { history,storeActions} = this.props;
+    const employeeDetail = {
+      employeeId,
+    }
     if(employeeId){
+      await storeActions.addEmployeeDetails({data:employeeDetail})
       history && history.push('/challenges');
     }
     
@@ -38,3 +38,5 @@ export class Start extends React.Component{
     )
   }
 }
+
+export const StartView = withStoreState(withStoreActions(Start));
