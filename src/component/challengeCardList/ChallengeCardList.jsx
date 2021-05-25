@@ -4,7 +4,7 @@ import {ChallengeCard } from './ChallengeCard';
 
 export class ChallengeCardList extends React.Component{
   renderChallengerCardList = (challengeDetail) =>{
-    return <ChallengeCard challengeDetail={challengeDetail}/>
+    return <ChallengeCard key={challengeDetail.id} challengeDetail={challengeDetail} {...this.props}/>
   }
   render(){
     const {challengeList}= this.props;

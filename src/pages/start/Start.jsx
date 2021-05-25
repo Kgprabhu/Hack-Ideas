@@ -1,43 +1,39 @@
 import React from 'react';
 
-import { ChallengeCardList } from '../../component/challengeCardList/ChallengeCardList'
 import './Start.css';
 
-export class Start extends React.Component{cchan
+export class Start extends React.Component{
   state={
-    challengeList:[{
-     title:'Sample1',
-     description:'asdfadf asdfadsf asdfadsfdd asdfasdfasdfasdf adsfasdfadsf',
-     tags:['feature,machine-learning'],
-     count:0,
-   },
-   {
-    title:'Sample1',
-    description:'asdfadf asdfadsf asdfadsfdd asdfasdfasdfasdf adsfasdfadsf',
-    tags:['feature,machine-learning'],
-    count:0,
-   },{
-    title:'Sample1',
-    description:'asdfadf asdfadsf asdfadsfdd asdfasdfasdfasdf adsfasdfadsf',
-    tags:['feature,machine-learning'],
-    count:0,
-   },{
-    title:'Sample1',
-    description:'asdfadf asdfadsf asdfadsfdd asdfasdfasdfasdf adsfasdfadsf',
-    tags:['feature,machine-learning'],
-    count:0,
-   }
-  ]
+    employeeId:'',
   }
-
+  handleChange = (event) =>{
+    const employeeId = event.target.value;
+    this.setState({
+      employeeId,
+    });
+  }
+  renderEmployeeDetails = () =>{
+    return (
+      <div className="employee-details">    
+        <label className="employee-id-lable">Enter Employee ID</label>
+        <input type="text" className="employee-id-textbox" onChange={this.handleChange}/>
+       </div>
+    )
+  }
+  handleClick =() =>{
+    const {employeeId}= this.state;
+    const { history} = this.props;
+    console.log('employeeId');
+    if(employeeId){
+      history && history.push('/challenges');
+    }
+    
+  }
   render(){
-    const { challengeList} = this.state;
     return(
-      <div>
-        <h2>Hackthons,Programming challenges</h2>
-        <div className="challenge-container">
-         <ChallengeCardList challengeList={challengeList}/>
-        </div>
+      <div className="employee-detail-container">
+        {this.renderEmployeeDetails()}
+        <button onClick={this.handleClick}>Submit</button>
       </div>
     )
   }
