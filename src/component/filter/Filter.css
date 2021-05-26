@@ -1,0 +1,12 @@
+.filter {
+  display: flex;
+  align-items: center;
+}
+.filter label {
+  font-weight: bold;
+  padding-right: 6px;
+}
+.filter select {
+  height: 24px;
+  border: 1px solid #ccc;
+}

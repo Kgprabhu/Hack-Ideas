@@ -5,12 +5,18 @@ import { Popup } from '../../component/popup/Popup';
 import { Filter } from '../../component/filter/Filter';
 import { withStoreState } from '../../hocs/withStoreState';
 import { withStoreActions } from '../../hocs/withStoreAction';
+import { NewChallenge } from './NewChallenge';
 import './Challenge.css';
+import { asendingSort } from '../../utils';
 
 export class Challenge extends React.Component{
 
   state={
     isPopVisible:false,
+  }
+
+  componentDidMount() {
+    this.filterSort('createdBy');
   }
 
   handleUpVote = (id) =>{
@@ -29,51 +35,31 @@ export class Challenge extends React.Component{
       data
     });
   }
-  asendingSort = (list,property) =>{
-    return list.sort((first,second)=> first[property] - second[property])
-  }
-  renderFilterContainer = () => {
-    const {storeState,storeActions}= this.props
+
+  filterSort = (filterValue) =>{
+    const {storeState,storeActions}= this.props;
     const challengeList = storeState.challenge?.data?.challengeList || [];
-    const dateSort = () => {
-      const sortedList = this.asendingSort([...challengeList],'date');
-      const data ={
-        challengeList:sortedList,
-      }
-      storeActions.addNewChallenge({
-        data
-      });
+    let sortedList;
+    if(filterValue === 'createdBy'){
+      sortedList = asendingSort([...challengeList],'date');
+    }else{
+      sortedList = asendingSort([...challengeList],'count');
     }
-    const upvoteSort = () => {
-      const sortedList = this.asendingSort([...challengeList],'count');
-      const data ={
-        challengeList:sortedList,
-      }
-      storeActions.addNewChallenge({
-        data
-      });
+    const data ={
+      challengeList:sortedList,
     }
-    return(
-      <Filter/>
-    )
+    storeActions.addNewChallenge({
+      data
+    });
   }
 
-  renderNewChallenge = () =>{
+  handleFilterChange = (filterValue) =>{
+    this.filterSort(filterValue);
+  }
+
+  renderFilterContainer = () => {
     return(
-      <div className="new-challenge-container">
-        <h2>Add New Challenge</h2>
-        <div className="new-challenge-wrapper">
-          <div>
-          <lable>Title</lable>
-          <input type="text" id="title"/>
-          </div>
-          <div>
-          <label>Description</label>
-          <textarea id="w3review" name="w3review" rows="4" cols="50"/>
-          </div>
-          <button>Submit</button>
-        </div>
-      </div>
+      <Filter onFilterChange={this.handleFilterChange}/>
     )
   }
 
@@ -91,11 +77,16 @@ export class Challenge extends React.Component{
     return(
       <div>
         <h2>Hackthons,Programming challenges</h2>
-        <button onClick={this.handlePopupToggle}>Create New Challenge</button>
-        {this.renderFilterContainer()}
-        <div className="challenge-container">
+        <div className="filter-section">
+          {this.renderFilterContainer()}
+          <button onClick={this.handlePopupToggle}>Create New Challenge</button>
+        </div>
+        <div className="card-wrapper">
          <ChallengeCardList storeState={storeState} storeActions={storeActions} onUpVoteClick={this.handleUpVote} challengeList={challengeList}/>
-         { isPopVisible && <Popup onClose={this.handlePopupToggle}>{this.renderNewChallenge()}</Popup>}
+         { isPopVisible && 
+         <Popup onClose={this.handlePopupToggle}>
+           <NewChallenge storeActions={storeActions} storeState={storeState} onPopupToggle={this.handlePopupToggle}/>
+          </Popup>}
         </div>
       </div>
     )

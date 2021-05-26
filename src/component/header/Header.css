@@ -1,0 +1,12 @@
+.Header-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: solid 1px #e4e4e4;
+}
+.about {
+  color: #8A959E;
+  font-weight: 600;
+  font-size: 18px;
+}

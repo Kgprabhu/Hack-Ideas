@@ -1,13 +1,16 @@
 import React from 'react';
+import './Filter.css'
 
 export class Filter extends React.Component{
   handleFilterChange = (event) =>{
-    console.log('eve',event.target.value);
+    const { onFilterChange } = this.props;
+    const filterValue = event.target.value;
+    onFilterChange(filterValue);
   }
   render(){
-    const filterList = ['reset','createdBy','upvoteCount']
+    const filterList = ['createdBy','upvoteCount']
     return(
-      <div>
+      <div className="filter">
         <label>SortBy</label>
         <select name="sortBy" id="soryBy" onChange={this.handleFilterChange}>
           {filterList.map((filter)=>{

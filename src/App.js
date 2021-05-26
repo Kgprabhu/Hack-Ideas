@@ -4,6 +4,8 @@ import { createStore } from 'redux';
 
 import { Routing } from './routes/Routing';
 import { topReducer } from './redux/topReducer';
+import { Header } from './component/header/Header.jsx';
+import { Footer } from './component/footer/Footer.jsx';
 
 import './App.css';
 
@@ -12,9 +14,13 @@ function App() {
   return (
     <Provider store={store}>
       <div className="App">
-        <Router>
-          <Routing/>
-        </Router>
+        <Header />
+        <div className="page-content">
+          <Router>
+            <Routing/>
+          </Router>
+        </div>
+        <Footer />
       </div>
     </Provider>
   );

@@ -32,8 +32,9 @@ export class Start extends React.Component{
   render(){
     return(
       <div className="employee-detail-container">
+        <h2>GET STARTED</h2>
         {this.renderEmployeeDetails()}
-        <button onClick={this.handleClick}>Submit</button>
+        <button className="employee-detail-submit" onClick={this.handleClick}>Submit</button>
       </div>
     )
   }
